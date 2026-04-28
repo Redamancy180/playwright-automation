@@ -126,13 +126,13 @@ def activate_debug_browser(chrome_proc=None, port=DEBUG_PORT):
     """Bring the debug Chrome window to the foreground for visual inspection."""
     pid = chrome_proc.pid if chrome_proc else find_debug_chrome_pid(port)
     if not pid:
-        print("No Chrome process found to activate; skipping window activation.")
+        print("No Chrome process found to activate; skipping window activation")
         return
     if activate_browser_window_by_pid(pid):
-        print("Activated the Chrome window.")
+        print("Activated the Chrome window")
         time.sleep(0.8)
     else:
-        print("Failed to activate the Chrome window; continuing.")
+        print("Failed to activate the Chrome window; continuing")
 
 
 def connect_browser(playwright, port=DEBUG_PORT):
