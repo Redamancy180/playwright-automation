@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pw-automation"
+version = "0.1.0"
+description = "Python Playwright automation helpers for team reuse"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "playwright",
+  "python-dotenv",
+]
+
+[project.scripts]
+pw-auto = "pw_automation.runner:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
