@@ -54,18 +54,18 @@ def start_debug_chrome(port=DEBUG_PORT, user_data_dir=USER_DATA_DIR):
 
 
 def ensure_debug_chrome(port=DEBUG_PORT, user_data_dir=USER_DATA_DIR):
-    """Reuse an existing debug Chrome, or start a new one if none is ready."""
+    """重用现有的调试 Chrome 浏览器，如果没有现成的，则创建一个新的。"""
     if is_debug_browser_ready(port):
-        print(f"Detected Chrome on debug port {port}, reusing the existing instance.")
+        print(f"检测到 Chrome 浏览器已启用调试端口 {port}, 重用现有实例。")
         return None
 
-    print(f"No Chrome detected on debug port {port}, starting a new instance.")
+    print(f"调试端口未检测到 Chrome 浏览器{port}, 启动一个新实例。")
     proc = start_debug_chrome(port=port, user_data_dir=user_data_dir)
     for _ in range(10):
         if is_debug_browser_ready(port):
             return proc
         time.sleep(0.5)
-    raise RuntimeError(f"Chrome started but the debug port is still unavailable: {port}")
+    raise RuntimeError(f"Chrome 已启动，但调试端口仍然不可用: {port}")
 
 
 def find_debug_chrome_pid(port=DEBUG_PORT):
@@ -91,7 +91,7 @@ def find_debug_chrome_pid(port=DEBUG_PORT):
 
 
 def activate_browser_window_by_pid(pid):
-    """Bring the Chrome window for the given PID to the foreground."""
+    """将指定 PID 的 Chrome 窗口置于前台。"""
     if not pid:
         return False
 
@@ -126,13 +126,13 @@ def activate_debug_browser(chrome_proc=None, port=DEBUG_PORT):
     """Bring the debug Chrome window to the foreground for visual inspection."""
     pid = chrome_proc.pid if chrome_proc else find_debug_chrome_pid(port)
     if not pid:
-        print("No Chrome process found to activate; skipping window activation")
+        print("未找到要激活的 Chrome 进程；跳过窗口激活")
         return
     if activate_browser_window_by_pid(pid):
-        print("Activated the Chrome window")
+        print("已激活 Chrome 窗口")
         time.sleep(0.8)
     else:
-        print("Failed to activate the Chrome window; continuing")
+        print("激活 Chrome 窗口失败；继续")
 
 
 def connect_browser(playwright, port=DEBUG_PORT):
