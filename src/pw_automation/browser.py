@@ -163,7 +163,7 @@ def close_page(page=None, browser=None, chrome_proc=None, force_close_browser=Fa
                 page.close(run_before_unload=True)
                 print("Closed the current tab.")
         except Exception as exc:
-            print(f"Failed to close the current tab: {exc}")
+            print(f"关闭当前标签页失败: {exc}")
 
     if not force_close_browser:
         return
